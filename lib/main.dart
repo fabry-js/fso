@@ -1,38 +1,33 @@
 import 'package:flutter/material.dart';
-import 'form/form.dart';
+import 'tabs/first_tab.dart';
+import 'tabs/second_tab.dart';
+import 'tabs/terza_tab.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
+        home: DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(icon: Icon(Icons.home_outlined)),
+              Tab(icon: Icon(Icons.favorite_outline)),
+              Tab(icon: Icon(Icons.settings_outlined))
+            ],
+          ),
+          title: Text("Tabs"),
         ),
-        home: HomeForm());
-  }
-}
-
-class HomeForm extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomForm(),
-      appBar: AppBar(
-        title: Text("Ciao!"),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.star_border_sharp),
-            onPressed: () => print("Ciao!"),
-          )
-        ],
+        body: TabBarView(
+          children: [RxDartCounterExample(), SecondTab(), ThirdTab()],
+        ),
       ),
-    );
+    ));
   }
 }
